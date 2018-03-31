@@ -70,9 +70,9 @@
   }
   function playSoundTouch (e) {
     const audio = document.querySelector(`audio[data-key="${e.path[1].dataset.key}"]`)
-    const key = document.querySelector(`.key[data-key="${e.path[1].dataset.key}"]`)
+    //const key = document.querySelector(`.key[data-key="${e.path[1].dataset.key}"]`)
     if (!audio) return // quit the function
-    key.classList.add('playing', 200)
+    this.classList.add('playing', 200)
     audio.currentTime = 0 // rewind to the start
     audio.play()
   }
