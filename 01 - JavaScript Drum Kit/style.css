@@ -14,7 +14,14 @@ body,html {
   padding: 0;
   font-family: sans-serif;
 }
-
+.msg {
+  width: 100vw;
+  color: white;
+  text-align: center;
+  font-size: 5vh;;
+  font-weight: 800;
+  text-shadow: 0 0 .7rem brown;
+}
 .keys {
   display: flex;
   flex-wrap: wrap;
