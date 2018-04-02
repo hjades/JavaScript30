@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>JS + CSS Clock</title>
 </head>
 <body>
-
-
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
     </div>
-
+  </div>
+  <div class="jade">JADE</div>
 
   <style>
     html {
-      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      background:black url(https://images.unsplash.com/photo-1518281420975-50db6e5d0a97?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=33cb4c56bb315e259e8c66c80b49ec97&auto=format&fit=crop&w=1050&q=80);
       background-size:cover;
       font-family:'helvetica neue';
       text-align: center;
       font-size: 10px;
     }
-
     body {
       margin: 0;
       font-size: 2rem;
       display:flex;
       flex:1;
-      min-height: 100vh;
+      height: 100vh;
       align-items: center;
     }
-
     .clock {
-      width: 30rem;
-      height: 30rem;
-      border:20px solid white;
+      width: 60vw;
+      height: 60vw;
+      max-width: 80vh;
+      max-height: 80vh;
+      box-sizing: border-box;
+      border:20px solid rgba(255, 255, 255, 0.8);
       border-radius:50%;
-      margin:50px auto;
+      margin: auto;
       position: relative;
       padding:2rem;
       box-shadow:
@@ -48,27 +48,51 @@
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
     }
-
     .clock-face {
       position: relative;
       width: 100%;
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
-
     .hand {
       width:50%;
       height:6px;
-      background:black;
+      background:white;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.24, 1.79, 1, 1);
     }
-
+    .jade {
+      position: fixed;
+      margin: 0 10px;
+      bottom: 0;
+      right: 0;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 10vh;
+      text-shadow: -0.5rem -0.3rem 0.1rem rgba(255, 255, 255, 0.7);
+    }
   </style>
 
   <script>
-
-
+    const secondHand = document.querySelector('.second-hand')
+    const minuteHand = document.querySelector('.min-hand')
+    const hourHand = document.querySelector('.hour-hand')
+    function setDate() {
+      const now = new Date()
+      const seconds = now.getSeconds()
+      const minutes = now.getMinutes()
+      const hours = now.getHours()
+      const secondsDegrees = ((seconds / 60) * 360) + 90
+      const minutesDegrees = (minutes / 60 * 360) + (seconds / 60 * 6) + 90
+      const hoursDegrees = (hours / 12 * 360) + (minutes / 60 * 30) + 90
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`
+      minuteHand.style.transform = `rotate(${minutesDegrees}deg)`
+      hourHand.style.transform = `rotate(${hoursDegrees}deg)`
+    }
+    setInterval(setDate, 1000) // per 1000ms
   </script>
 </body>
 </html>
